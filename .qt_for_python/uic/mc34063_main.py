@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'h:\python\GB_homework_python\mc34063_main.ui'
+# Form implementation generated from reading ui file 'h:\python\GB_homework_python\configurator_mc34063\mc34063_main.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.7
 #
@@ -106,7 +106,7 @@ class Ui_Dialog(object):
         self.save_back_calc_2 = QtWidgets.QPushButton(self.Tab_1)
         self.save_back_calc_2.setGeometry(QtCore.QRect(290, 600, 91, 31))
         self.save_back_calc_2.setObjectName("save_back_calc_2")
-        self.webWidget = QtWebEngineWidgets.QWebEngineView(self.Tab_1)
+        self.webWidget = QtWidgets.QWidget(self.Tab_1)
         self.webWidget.setGeometry(QtCore.QRect(440, 450, 811, 351))
         self.webWidget.setObjectName("webWidget")
         self.lineEdit_3 = QtWidgets.QLineEdit(self.Tab_1)
@@ -158,4 +158,3 @@ class Ui_Dialog(object):
         self.label_7.setText(_translate("Dialog", "Расчетная частота"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.Tab_1), _translate("Dialog", "Понижающий(Buck)"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("Dialog", "Повышающий(Bust)"))
-from PyQt5 import QtWebEngineWidgets

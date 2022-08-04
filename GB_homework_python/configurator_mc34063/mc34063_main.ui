@@ -220,7 +220,7 @@ p, li { white-space: pre-wrap; }
       <string>загрузить</string>
      </property>
     </widget>
-    <widget class="QWebEngineView" name="webWidget" native="true">
+    <widget class="QWidget" name="webWidget" native="true">
      <property name="geometry">
       <rect>
        <x>440</x>
