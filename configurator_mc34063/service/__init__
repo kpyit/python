@@ -1,0 +1,10 @@
+# структура пакета
+# service
+# |-- __init__.py
+# |-- service_load.py    математика по микросхеме
+# |-- .py
+# |-- .py
+
+# from service import *
+__all__ = ["service_load"]
+

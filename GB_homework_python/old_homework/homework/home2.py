@@ -216,6 +216,7 @@ def shuffle_list(list_to_reorder: list) -> list:
         id_next = randrange(len(list_to_reorder))
         new_list.append(list_to_reorder.pop(id_next))
     print(f'перемешанный список {new_list}')
+ 
 
 
-
+ 

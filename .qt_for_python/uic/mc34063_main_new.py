@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'h:\python\GB_homework_python\configurator_mc34063\res\mc34063_main.ui'
+# Form implementation generated from reading ui file 'h:\python\GB_homework_python\configurator_mc34063\mc34063_main_new.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.7
 #

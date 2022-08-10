@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'h:\python\GB_homework_python\configurator_mc34063\res\mc34063_main.ui'
+# Form implementation generated from reading ui file 'h:\python\GB_homework_python\configurator_mc34063\mc34063_main_first.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.7
 #
@@ -11,93 +11,12 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1250, 981)
-        MainWindow.setStyleSheet("MainWindow { background-color: #272822;}\n"
-"\n"
-"/*******************************************************************************/\n"
-"QMenuBar { color: White;\n"
-"    margin: 2px; /* some spacing around the menu */\n"
-"}\n"
-"QMenu { \n"
-"    color: White;\n"
-"    margin: 2px; /* some spacing around the menu */\n"
-"}\n"
-"/*QAction { color: White;}*/\n"
-"QMenu::item {\n"
-"    padding: 2px 25px 2px 20px;\n"
-"    border: 1px solid transparent; /* reserve space for selection border */\n"
-"}\n"
-"\n"
-"QMenu::item:selected {\n"
-"    border-color: gray;\n"
-"    background: rgba(100, 100, 100, 150);\n"
-"}\n"
-"\n"
-"QMenu::icon:checked { /* appearance of a \'checked\' icon */\n"
-"    background: gray;\n"
-"    border: 1px inset gray;\n"
-"    position: absolute;\n"
-"    top: 1px;\n"
-"    right: 1px;\n"
-"    bottom: 1px;\n"
-"    left: 1px;\n"
-"}\n"
-"/*\n"
-"QMenu::separator {\n"
-"    height: 2px;\n"
-"    background: lightblue;\n"
-"    margin-left: 10px;\n"
-"    margin-right: 5px;\n"
-"}*/\n"
-"\n"
-"QMenu::indicator {\n"
-"    width: 13px;\n"
-"    height: 13px;\n"
-"}\n"
-"\n"
-"/* non-exclusive indicator = check box style indicator (see QActionGroup::setExclusive) */\n"
-"QMenu::indicator:non-exclusive:unchecked {\n"
-"    image: url(:/images/checkbox_unchecked.png);\n"
-"}\n"
-"\n"
-"QMenu::indicator:non-exclusive:unchecked:selected {\n"
-"    image: url(:/images/checkbox_unchecked_hover.png);\n"
-"}\n"
-"\n"
-"QMenu::indicator:non-exclusive:checked {\n"
-"    image: url(:/images/checkbox_checked.png);\n"
-"}\n"
-"\n"
-"QMenu::indicator:non-exclusive:checked:selected {\n"
-"    image: url(:/images/checkbox_checked_hover.png);\n"
-"}\n"
-"\n"
-"/* exclusive indicator = radio button style indicator (see QActionGroup::setExclusive) */\n"
-"QMenu::indicator:exclusive:unchecked {\n"
-"    image: url(:/images/radiobutton_unchecked.png);\n"
-"}\n"
-"\n"
-"QMenu::indicator:exclusive:unchecked:selected {\n"
-"    image: url(:/images/radiobutton_unchecked_hover.png);\n"
-"}\n"
-"\n"
-"QMenu::indicator:exclusive:checked {\n"
-"    image: url(:/images/radiobutton_checked.png);\n"
-"}\n"
-"\n"
-"QMenu::indicator:exclusive:checked:selected {\n"
-"    image: url(:/images/radiobutton_checked_hover.png);\n"
-"}\n"
-"\n"
-"/*******************************************************************************/\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"\n"
+class Ui_Dialog(object):
+    def setupUi(self, Dialog):
+        Dialog.setObjectName("Dialog")
+        Dialog.setEnabled(True)
+        Dialog.resize(1260, 840)
+        Dialog.setStyleSheet("QDialog { background-color: #272822;}\n"
 "\n"
 "QTabWidget { background-color: #272822;} /* не ясно на что влияет важен порядок вложенности*/\n"
 "\n"
@@ -149,10 +68,8 @@ class Ui_MainWindow(object):
 "QLineEdit { background-color: #f2f2f2; }\n"
 "QTextEdit { background-color: #f2f2f2; }\n"
 "QLabel {  color: White; }")
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
-        self.centralwidget.setObjectName("centralwidget")
-        self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
-        self.tabWidget.setGeometry(QtCore.QRect(0, 10, 1251, 831))
+        self.tabWidget = QtWidgets.QTabWidget(Dialog)
+        self.tabWidget.setGeometry(QtCore.QRect(20, 50, 1251, 831))
         self.tabWidget.setObjectName("tabWidget")
         self.Tab_1 = QtWidgets.QWidget()
         self.Tab_1.setObjectName("Tab_1")
@@ -212,57 +129,37 @@ class Ui_MainWindow(object):
         self.label_7 = QtWidgets.QLabel(self.Tab_1)
         self.label_7.setGeometry(QtCore.QRect(20, 220, 141, 21))
         self.label_7.setObjectName("label_7")
-        self.open_w_add_component_232 = QtWidgets.QPushButton(self.Tab_1)
-        self.open_w_add_component_232.setGeometry(QtCore.QRect(390, 140, 171, 31))
-        self.open_w_add_component_232.setObjectName("open_w_add_component_232")
+        self.open_w_add_component = QtWidgets.QPushButton(self.Tab_1)
+        self.open_w_add_component.setGeometry(QtCore.QRect(390, 140, 171, 31))
+        self.open_w_add_component.setObjectName("open_w_add_component")
         self.tabWidget.addTab(self.Tab_1, "")
         self.tab_2 = QtWidgets.QWidget()
         self.tab_2.setObjectName("tab_2")
         self.tabWidget.addTab(self.tab_2, "")
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1250, 30))
-        self.menubar.setObjectName("menubar")
-        self.menu = QtWidgets.QMenu(self.menubar)
-        self.menu.setObjectName("menu")
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
-        self.action = QtWidgets.QAction(MainWindow)
-        self.action.setObjectName("action")
-        self.open_w_add_component = QtWidgets.QAction(MainWindow)
-        self.open_w_add_component.setObjectName("open_w_add_component")
-        self.menu.addAction(self.action)
-        self.menu.addAction(self.open_w_add_component)
-        self.menubar.addAction(self.menu.menuAction())
 
-        self.retranslateUi(MainWindow)
+        self.retranslateUi(Dialog)
         self.tabWidget.setCurrentIndex(0)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(Dialog)
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.calculate_back_simple.setText(_translate("MainWindow", "Расчет"))
-        self.save_back_calc.setText(_translate("MainWindow", "сохранить результат"))
-        self.textEdit.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        self.calculate_back_simple.setText(_translate("Dialog", "Расчет"))
+        self.save_back_calc.setText(_translate("Dialog", "сохранить результат"))
+        self.textEdit.setHtml(_translate("Dialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
-        self.label.setText(_translate("MainWindow", "Входное напряжение"))
-        self.label_2.setText(_translate("MainWindow", "Выходное напряжение"))
-        self.label_3.setText(_translate("MainWindow", "Комментарий к расчету"))
-        self.save_back_calc_2.setText(_translate("MainWindow", "загрузить"))
-        self.label_4.setText(_translate("MainWindow", "Выходная емкость"))
-        self.label_5.setText(_translate("MainWindow", "Выходной ток"))
-        self.label_6.setText(_translate("MainWindow", "Авторасчет частоты"))
-        self.label_7.setText(_translate("MainWindow", "Расчетная частота"))
-        self.open_w_add_component_232.setText(_translate("MainWindow", "Загрузить компоненты"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.Tab_1), _translate("MainWindow", "Понижающий(Buck)"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Повышающий(Bust)"))
-        self.menu.setTitle(_translate("MainWindow", "Меню"))
-        self.action.setText(_translate("MainWindow", "Сохранить вариант"))
-        self.open_w_add_component.setText(_translate("MainWindow", "Редактировать компоненты"))
+        self.label.setText(_translate("Dialog", "Входное напряжение"))
+        self.label_2.setText(_translate("Dialog", "Выходное напряжение"))
+        self.label_3.setText(_translate("Dialog", "Комментарий к расчету"))
+        self.save_back_calc_2.setText(_translate("Dialog", "загрузить"))
+        self.label_4.setText(_translate("Dialog", "Выходная емкость"))
+        self.label_5.setText(_translate("Dialog", "Выходной ток"))
+        self.label_6.setText(_translate("Dialog", "Авторасчет частоты"))
+        self.label_7.setText(_translate("Dialog", "Расчетная частота"))
+        self.open_w_add_component.setText(_translate("Dialog", "Загрузить компоненты"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.Tab_1), _translate("Dialog", "Понижающий(Buck)"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("Dialog", "Повышающий(Bust)"))
 from PyQt5 import QtWebEngineWidgets

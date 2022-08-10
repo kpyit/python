@@ -1,0 +1,10 @@
+# структура пакета
+# database
+# |-- __init__.py
+# |-- database_lite.py
+# |-- .py
+# |-- .py
+
+# from database import *
+__all__ = ["database_lite"]
+

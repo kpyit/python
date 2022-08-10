@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1250</width>
+    <height>862</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog { background-color: #272822;}
+
+QTabWidget { background-color: #272822;} /* не ясно на что влияет важен порядок вложенности*/
+
+/******************************************************/
+ 
+/* типа глобального определения*/
+QWidget {
+    background-color: #333333;
+    color: #fffff8;
+}
+/*
+ 
+QTableView::indicator:unchecked {
+    background-color: #d7d6d5
+}*/
+
+QTableView {
+
+/*	background-color: yellow;*/
+/*	background-color: #ffaaaa;*/
+/*	border-style:  2px outset red;*/
+	
+	background-color: #d7d6d5;
+    selection-background-color: white;
+}
+
+/* общий стиль для всех секций */
+QHeaderView::section {
+	min-width: 28px;
+    background-color: #646464;
+    padding: 4px;
+    font-size: 12pt;
+    border-style: none;
+    border-bottom: 1px solid #fffff8;
+    border-right: 1px solid #fffff8;
+	
+	/*width: 180px;*/
+/*	margin: 0;*/
+    padding-right: 4px;
+/*	white-space: nowrap;*/
+}
+
+/*верхний ряд*/
+QHeaderView::section:horizontal
+{
+
+	height: 25px;
+
+/*	table-layout: auto;*/
+	width: 1200px;
+    border-top:1px solid #fffff8;
+}
+/* вертикальный  ряд*/
+QHeaderView::section:vertical
+{
+/* работает только на 1 колонку 		Width: 120px; */
+
+    border-left: 1px solid #fffff8;
+}
+/* уголок */
+QTableView QTableCornerButton::section {
+    background-color: #646464;
+/*    background: red; */
+   border: 1px solid #fffff8;
+}
+
+QTableView::item {
+	background-color: #FFFFFF;
+	color: black;
+	row-width: 1200px;
+};
+
+QTableView::item:alternate { background-color: #111111; } 
+
+
+
+QTableView::item:selected {
+    background-color: rgb(242, 128, 133);
+}
+
+/******************************************************/
+
+
+
+QTabWidget::pane { /* The tab widget frame */
+    border-top: 2px solid #676d73;
+}
+ 
+
+
+QTabWidget::tab-bar {
+    left: 15px; /* move to the right by 5px */
+}
+/* Style the tab using the tab sub-control. Note that
+    it reads QTabBar _not_ QTabWidget */
+QTabBar::tab {
+	color: White;
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #565657, stop: 1.0 #272822);
+    border: 2px solid #676d73;
+    border-bottom-color: #676d73; /* same as the pane color */
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    min-width: 25ex;
+    padding:2 10px;
+}
+
+QTabBar::tab:selected, QTabBar::tab:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #91969c, stop:  1.0 #676d73);
+}
+
+QTabBar::tab:selected {
+    border-color: #9B9B9B;
+    border-bottom-color: #C2C7CB; /* same as pane color */
+}
+
+QTabBar::tab:!selected {    margin-top: 2px; /* make non-selected tabs look smaller */}
+/* make use of negative margins for overlapping tabs */
+QTabBar::tab:selected {     /* expand/overlap to the left and right by 4px */    
+	margin-left: -4px;
+    margin-right: -4px;
+}
+QTabBar::tab:first:selected {    margin-left: 0; /* the first selected tab has nothing to overlap with on the left */}
+QTabBar::tab:last:selected {    margin-right: 0; /* the last selected tab has nothing to overlap with on the right */}
+QTabBar::tab:only-one {    margin: 0; /* if there is only one tab, we don't want overlapping margins */}
+
+/* содержимое таба */
+QWidget { background-color: #272822; }
+
+QPushButton { color: White; background-color: Green }
+
+QLineEdit { background-color: #f2f2f2; }
+QTextEdit { background-color: #f2f2f2; }
+QLabel {  color: White; }</string>
+  </property>
+  <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>690</y>
+     <width>501</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>460</y>
+     <width>121</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Выбрвть файл</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_2">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>460</y>
+     <width>191</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Обновить данные с файла</string>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="table_components">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>50</y>
+     <width>1231</width>
+     <height>361</height>
+    </rect>
+   </property>
+   <row>
+    <property name="text">
+     <string>1</string>
+    </property>
+   </row>
+   <column>
+    <property name="text">
+     <string>Назавание</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Тип диода</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Макс V(В)</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Макс A(mA)</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Исполнение</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Контрольные точки</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Cпецификация</string>
+    </property>
+   </column>
+   <item row="0" column="0">
+    <property name="text">
+     <string/>
+    </property>
+   </item>
+   <item row="0" column="3">
+    <property name="text">
+     <string/>
+    </property>
+   </item>
+  </widget>
+  <widget class="QPushButton" name="pushButton_3">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>500</y>
+     <width>321</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Ипортировать перечень диодов</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="widget_draw" native="true">
+   <property name="geometry">
+    <rect>
+     <x>610</x>
+     <y>420</y>
+     <width>631</width>
+     <height>411</height>
+    </rect>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>Dialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>Dialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
