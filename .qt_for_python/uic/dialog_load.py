@@ -151,17 +151,12 @@ class Ui_Dialog(object):
 "QLineEdit { background-color: #f2f2f2; }\n"
 "QTextEdit { background-color: #f2f2f2; }\n"
 "QLabel {  color: White; }")
-        self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
-        self.buttonBox.setGeometry(QtCore.QRect(20, 690, 501, 32))
-        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
-        self.buttonBox.setObjectName("buttonBox")
-        self.pushButton = QtWidgets.QPushButton(Dialog)
-        self.pushButton.setGeometry(QtCore.QRect(10, 460, 121, 28))
-        self.pushButton.setObjectName("pushButton")
-        self.pushButton_2 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_2.setGeometry(QtCore.QRect(140, 460, 191, 28))
-        self.pushButton_2.setObjectName("pushButton_2")
+        self.select_load_file = QtWidgets.QPushButton(Dialog)
+        self.select_load_file.setGeometry(QtCore.QRect(10, 460, 121, 28))
+        self.select_load_file.setObjectName("select_load_file")
+        self.reload_file = QtWidgets.QPushButton(Dialog)
+        self.reload_file.setGeometry(QtCore.QRect(140, 460, 191, 28))
+        self.reload_file.setObjectName("reload_file")
         self.table_components = QtWidgets.QTableWidget(Dialog)
         self.table_components.setGeometry(QtCore.QRect(10, 50, 1231, 361))
         self.table_components.setObjectName("table_components")
@@ -195,15 +190,13 @@ class Ui_Dialog(object):
         self.widget_draw.setObjectName("widget_draw")
 
         self.retranslateUi(Dialog)
-        self.buttonBox.accepted.connect(Dialog.accept) # type: ignore
-        self.buttonBox.rejected.connect(Dialog.reject) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.pushButton.setText(_translate("Dialog", "Выбрвть файл"))
-        self.pushButton_2.setText(_translate("Dialog", "Обновить данные с файла"))
+        self.select_load_file.setText(_translate("Dialog", "Выбрать файл"))
+        self.reload_file.setText(_translate("Dialog", "Обновить данные с файла"))
         item = self.table_components.verticalHeaderItem(0)
         item.setText(_translate("Dialog", "1"))
         item = self.table_components.horizontalHeaderItem(0)

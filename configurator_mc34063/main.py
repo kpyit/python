@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QVBo
 from PyQt5.QtGui import QBrush, QPainter, QPen, QPixmap, QPolygonF,QImage
 from PyQt5.QtCore import Qt
 from random import randint
-
+ 
 # математика по микросхеме
 from math_mc34063 import mc34063
 # работа с sqlite
@@ -21,15 +21,11 @@ db = database_lite.sqlite_database()
 
 FILE_IMAGE_BUCK_SCHEME = r'configurator_mc34063/res/BUCK_SHEM_SIMPLE.PNG'
 
-
 FILE_UI_MAIN_WINDOW = r"configurator_mc34063/res/mc34063_main.ui"
 
-
 LABEL_MAIN_WINDOW = r'mc34063 расчет номиналов схем'
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
-
-
-
+ 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
  
  
 # ********************************************************************************
@@ -55,8 +51,7 @@ class MainWindow_mc():
         #Контектное меню ! СТИЛИ НЕ НАСТРОЕНЫ!
         # self.ui.setContextMenuPolicy(Qt.CustomContextMenu)
         # self.ui.customContextMenuRequested.connect(self.on_context_menu)
-
-
+ 
         self.ui.show()
 
         # self.button = QtWidgets.QPushButton("Push for Window")
