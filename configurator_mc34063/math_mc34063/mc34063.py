@@ -134,16 +134,12 @@ class math_mc34063():
         forvard_v = cubic_regression(test_current)
         print(f'forvard_v  {forvard_v}')
 
-
         xnew=np.linspace(np.min(points_x),max_current,100)
         ynew=cubic_regression(xnew)
 
-        
         plt.plot(points_y,points_x,'o',ynew,xnew)
         plt.grid(True)
         plt.show()
-
-
 
 
     def calc_coef_regression(self,json_points:str)->list:
@@ -158,7 +154,6 @@ class math_mc34063():
         return coef
 
 
-
     def calc_v_drop_by_current(self,coef:list,test_current:float)->float:
         '''расчет падения напряжения по току'''
         print(f'coef {coef}')# кэфф совпадают график нет https://planetcalc.ru/5992/
@@ -171,57 +166,147 @@ class math_mc34063():
         print(f'forvard_v  {forvard_v}')
 
         return forvard_v
+
+# Расчеты в математике
+
+####################################################################################################
+    
+    #математика расчета
+    # Вводные
+    # Vout = 5.0 V
+    # Iout = 50 mA
+    # fmin = 50 kHz
+    # Vin(min) = 24 V − 10% or 21.6 V
+    # Vripple(p−p) = 0.5% V_out or 25mV(p−p)
+
+    def init_params_back(self) -> None:
+        self.Vout = 5.0
+        self.Iout = 50 #mA а амперы прийдется приводить к милиамперам
+        self.fmin = 50 #kHz частота только в килогерцах от 10 до 100 границы
+        self.Vin = 24  #тест на напряжение от 3.0 V to 40 V
+        self.delta_v_percent = 10  #отклонение напряжения в меньшую сторону
+        self.Vin_min = self.Vin*(1.0-self.delta_v_percent/100.0)
+        print(f"self.Vin_min {self.Vin_min} V")
+        # допуск по пульсациям есть нижняя граница за счет компоратора
+        self.Vripple_p_p_percent = 0.5 # %
+        self.Vripple_p_p = self.Vout*(1.0-self.Vripple_p_p_percent/100.0) #= 0.025 # 25mV(p−p)
+        print(f"self.Vripple_p_p {self.Vripple_p_p} V")
+        #возможно на диоде?
+        self.V_F = 0.8
+        #V_F падение на ключе
+        self.V_sat = 0.8
+        
+
+    # расчет времени открытого и закрытого диода(кочено при предельной загрузке)
+    # t_on/t_off  = (Vout + V_F)/(V_in(min) - V_sat - V_out)
+    # = (5.0 + 0.8)/(21.6 - 0.8 - 5.0) = 0.37
+    def calc_t_on_t_off(self) -> None:
+       self.t_on_div_t_off  = (self.Vout + self.V_F)/(self.Vin_min - self.V_sat - self.Vout)
+       print(f"self.t_on_div_t_off {self.t_on_div_t_off:3.3f}")
  
-#математика расчета
-# Вводные
-# Vout = 5.0 V
-# Iout = 50 mA
-# fmin = 50 kHz
-# Vin(min) = 24 V − 10% or 21.6 V
-# Vripple(p−p) = 0.5% V_out or 25mV(p−p)
+    # Тоесть микро секунды а частоту можно задавать в килогерцах сразу.
+    # ton(max) + toff   = 1/f_min = 1/(50*10^3) = 20 us на такт
+    def calc_t_on_sum_t_off( self ) -> None:
+        self.t_on_sum_t_off  = 1/( self.fmin*10**3 )
+        print( f"self.t_on_sum_t_off {self.t_on_sum_t_off:3.3f} us" )
 
-# расчет времени открытого и закрытого диода(кочено при предельной загрузке)
-# t_on/t_off  = (Vout + V_F)/(V_in(min) - V_sat - V_out)
-# = (5.0 + 0.8)/(21.6 - 0.8 - 5.0) = 0.37
+    # toff = (ton(max) + toff)/(ton/toff + 1)
+    # = 20 * 10**− 6/(0.37 +1 )
+    def calc_t_off(self):
+        self.t_off  = self.t_on_sum_t_off/(1+ self.t_on_div_t_off)
+        print( f"self.t_off {self.t_off:3.3f} us" )
 
-# Тоесть микро секунды а частоту можно задавать в килогерцах сразу.
-# ton(max) + toff   = 1/f_min = 1/(50*10^3) = 20 us на такт
+    # ton(max) + toff = 20 us
+    # ton(max) = 20 us - 14.6 us =  5.4 us        
+    def calc_t_on_max(self):
+        self.t_on_max  = self.t_on_sum_t_off-self.calc_t_off
+        print( f"self.t_on_max {self.t_on_max:3.3f} us" )
+        
+    # 4) C_T = 4.0 * 10**− 5* ton
+    #  = 4.0 * 10**− 5 (5.4 * 10**− 6) =  216 pF
+    def calc_C_t(self):
+        self.C_t  =  4.0 * 10**-5 * self.t_on_max
+        print( f"self.C_t {self.C_t:3.3f} pF")
+        # Ряд конденсаторов формируется просто  http://katod-anod.ru/articles/59
+        # 				Ряд Е6 10, 15, 22, 33, 47, 68 каждый следующий номинал +10
+        # из него выбирается подходящий
 
-# toff = (ton(max) + toff)/(ton/toff + 1)
-# = 20 * 10**− 6/(0.37 +1 )
+    # 5) ранее расчитанному среднему току
+    # Ipk(switch)  = 2*Iout = 2*(50*10−3) = 100_mA
+    def calc_I_pk_switch(self):
+        self.Ipk_switch  =  2.0 * self.Iout
+        print(f"self.Ipk_switch {self.Ipk_switch:3.3f} mA")
 
-# ton(max) + toff = 20 us
-# ton(max) = 20 us - 14.6 us =  5.4 us
+    # 6) смотрим разность напряжений между входным и выходным каскадом делим его на пиковый ток и умножаем на время
+    # в состоянии заряда  разряд почему-то не удаляем
+    # Lmin = ( ( Vin(min) - Vsat - Vout )/Ipk(switch) ) * ton(max) =
+    # = (21.6-0.8-5.0 )/100*10**−3 )*5.4*10**−6 =
+    # = 853 uH
+    def calc_Lmin(self):
+        self.Lmin = ( ( self.Vin_min - self.V_sat - self.Vout )/self.Ipk_switch ) * self.t_on_max
+        print(f"self.Lmin {self.Lmin:3.3f} uH")
 
-# C_T = 4.0 * 10**− 5* ton
-#  = 4.0 * 10**− 5 (5.4 * 10**− 6) =  216 pF
+    # 7) Значение резистора ограничения тока, Rsc, может быть определено с помощью текущего уровня Ipk(switch) при Uвх = 24 В(Макс)
+    # расчет токаограничивающего резистора
+    # Ipk(switch) = ( (Vin - Vsat - Vout)/Lmin)*ton(max) = 
+    # = ((24 - 0.8- 5.0)/853*10**-6)* 5.4*10-6 =  115 mA
+    def _calc_Ipk_switch_Vmax(self):
+        self.Ipk_switch_Vmax = ((self.Vin - self.V_sat - self.Vout)/self.Lmin)*self.t_on_max
+        print(f"self.Ipk_switch_Vmax {self.Ipk_switch_Vmax:3.3f} mA")
 
-# Ряд конденсаторов формируется просто  http://katod-anod.ru/articles/59
-# 				Ряд Е6 10, 15, 22, 33, 47, 68 каждый следующий номинал +10
+    # Rsc =  0.33/Ipk(switch)  = 0.33/115*10**−3 = 2.86 Om, use 2.7 из ряда номиналов ближайший меньший
+    # тут нужен тест на пиковый ток он не должен быть более 1.5А который якобы выдерживает внутренний в микросхеме
+    def calc_Ipk_switch_Vmax(self):
+        self._calc_Ipk_switch_Vmax()
+        self.Rsc =  0.33/self.Ipk_switch_Vmax
+        print(f"self.Rsc {self.Rsc:3.3f} mA")
+
+    # 8) Минимальное значение для идеального конденсатора выходного фильтра
+    # Co = (Ipk(switch)*(ton + toff))/(8*Vripple(p-p))
+    # = (0.1*(20*10**-6))/8 (25*10**-3) = 10 uF
+    def calc_С_output(self):
+        # я бы подставил предельный ток а не при минимальном напряжении
+        self.C_o = (self.Ipk_switch*(self.t_on + self.t_off))/(8*self.Vripple_p_p)        
+        print(f"self.C_o {self.C_o:3.3f} uF")
+
+    # 9) Номинальное выходное напряжение программируется Резисторным делителем R1, R2. Выходное напряжение:
+    # V = 1.25(R2/R1 + 1)
+    # V_out = V_in(%ton)
+    # V_out = V_in(ton/(ton + toff)
+    # Ток делителя может достигать 100 мкА без влияния на производительность системы. 
+    # При выборе минимальный делитель тока R1 равен: 
+    # R1 = 1.25/(100*10**-6) = 12.500 Om
+    def calc_R1(self):
+        # расчет ужасен
+        self.R1 = 1.25/(100*10**-6)
+        print(f"self.R1 {self.R1:3.3f} uF")
+
+    # Подставляем приведенное выше уравнение так, чтобы R2 можно было вычислить:
+    # R2 = R1*(Vout/1.25 - 1)
+    # Если для R1 выбран стандартный резистор 12 кОм с допуском 5%, R2 также будет стандартным значением.
+    # R2 = 12*10**3(5.0/1.25-1) = 36 kOm
+    def calc_R2(self):
+        self.R2 = self.R1*(self.Vout/1.25-1)
+        print(f"self.R2 {self.R2:3.3f} uF")
 
 
 
-# V = 1.25(R2/R1 + 1)
-# V_out = V_in(%ton)
-# V_out = V_in(ton/(ton + toff)
+    # # #
+    def test_calc_buck(self)->None:
+        self.init_params_back()
+        self.calc_t_on_t_off()
+        self.calc_t_on_sum_t_off()
+        self.calc_t_off()
+        self.calc_t_on_max()
+        self.calc_C_t()
+        self.calc_I_pk_switch()
+        self.calc_Lmin()
+        self._calc_Ipk_switch_Vmax()
+        self.calc_С_output()
+        self.calc_R1()
+        self.calc_R2()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 
@@ -359,16 +444,6 @@ if __name__ == '__main__':
     # resistor_list_E96_R_0805 = mathematics.generate_list_resistors(RES_E96,R_0805)
 
 
-
-
-
-
-
-
-
-
-    
- 
 ##################################################################
 # max_current = 2
 # forvard_v = db.lagranz(points_x,points_y,max_current)
